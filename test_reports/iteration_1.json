@@ -1,0 +1,41 @@
+{
+  "summary": "Comprehensive backend + frontend testing of Phase 1 Auto Body Shop app. 22/22 backend pytest cases pass covering public (openapi, settings, gallery, reviews), appointment creation validation (missing name/phone -> 422, past date -> 422, invalid/missing time -> 422, >3 photos -> 422, non-image -> 422, happy path -> 201, duplicate within 2 min -> 409), email notification recorded as 'failed:' (expected: EMERGENT_EMAIL_KEY not provisioned, booking still succeeds), JWT auth (login success/failure, /auth/me), admin CRUD (list/filter/sort, invalid status, create owner entry with source=owner, update status + date with past-date rejection, delete), and 401 on admin endpoints without/with invalid token. Frontend tested on desktop 1920 and mobile 390: all required data-testid sections present (hero, services incl service-card-collision, gallery with 6 items, reviews 4 cards, booking form, contact footer, placeholder banner). Lightbox opens on gallery click. Booking form inline validation errors (error-name/phone/preferred_date/preferred_time) render on empty submit; date input has min=today (2026-10-19). Happy-path booking submission shows booking-success-message with personalised text. Admin: wrong password shows admin-login-error, correct login reaches dashboard with filters, stats, sort, search, add-appointment button. Add-appointment dialog saves owner entry which shows 'OWNER ENTRY' badge; website submissions show 'WEBSITE' badge. Details sheet opens with status buttons; details-save-schedule-button only renders when date/time is dirty; past-date save -> backend 422; valid date persists. Row-level status change via native select works. Delete flow is accessed from inside details sheet (appointment-delete-button -> delete-confirm-button).",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [
+      {"flow": "Admin schedule save: past date", "issue": "Backend returns 422 'Preferred date cannot be in the past', but no visible toast/inline error is shown to the owner in the details sheet; only a browser console 422 is logged. Users may think save silently failed.", "affected_selectors": ["details-save-schedule-button", "details-date-input"]}
+    ],
+    "design_issues": [
+      {"screen": "Public landing", "issues": ["Orange placeholder-banner contrasts strongly with dark theme but is readable; acceptable."]}
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_api.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "Add a user-visible error toast when PATCH /api/admin/appointments/{id} returns a validation error (e.g. past date) in AppointmentDetails saveSchedule(). Currently the sheet shows no feedback."
+  ],
+  "critical_code_review_comments": [
+    "backend/server.py uses deprecated FastAPI @app.on_event('startup')/shutdown; migrate to lifespan handler to avoid future removal warnings.",
+    "notify_owner fingerprint lock TTL (180s) is slightly larger than DUPLICATE_WINDOW (120s). Fine, but keep in sync via constant.",
+    "admin PATCH does not update appointment.preferred_time when only time changes with same string ('' coerced to ''): fine, but when preferred_time submitted equal to existing with empty string it still overwrites updated_at via now_iso only if updates has keys — handled correctly.",
+    "AppointmentDetails saveSchedule silently swallows API errors (no toast/error UI). See action_items.",
+    "CORS allow_origins defaults to '*' with allow_credentials=True; browsers reject credentialed requests with wildcard — set explicit origins in prod.",
+    "shop_config.py SAMPLE_GALLERY image URLs point to emergentagent static host; verify long-term availability or self-host."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_api.py (new)"
+  ],
+  "success_rate": {"backend": "100% (22/22)", "frontend": "~95% (all required flows verified; only cosmetic missing toast)"},
+  "test_credentials": "owner@autobodyshop.com / Owner@12345 (from /app/memory/test_credentials.md)",
+  "seed_data_creation": "Backend seed on startup verified: >=6 gallery items, >=4 reviews, owner user, settings doc. Test data (TEST_* prefixed) created and cleaned up via API + UI.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Backend test suite at /app/backend/tests/test_api.py is complete and runs under 1s with pytest-xdist loadscope. Known environment constraints: EMERGENT_EMAIL_KEY missing (email_notification stores 'failed: EMERGENT_EMAIL_KEY is not configured'); Emergent Object Storage upstream /init returns 500 so photo uploads will 502 — do not treat as code bug. For UI: service-select & time-select on booking form are NATIVE <select> elements (use page.select_option, not shadcn option clicks). Admin add-appointment time uses native <input type='time'> (use page.fill('09:00')). Delete flow is only available inside the AppointmentDetails sheet, not at the row level. details-save-schedule-button only appears after the date/time becomes dirty.",
+  "rca of the issue": "Minor UX gap: AppointmentDetails.saveSchedule() does not surface the backend's 422 'Preferred date cannot be in the past' to the user. Reproduction: /admin -> open any appointment details -> change date to a past date -> click 'Save date & time' -> backend returns 422, console shows error, but no toast or inline error renders. Mitigation: wrap the PATCH call in try/catch and call the toast() util with the error.detail (same pattern used in BookingForm.jsx on submit errors)."
+}

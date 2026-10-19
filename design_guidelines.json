@@ -1,0 +1,193 @@
+{
+  "project_info": {
+    "name": "Apex Precision Collision & Custom Paint",
+    "app_type": "hybrid_fullstack",
+    "theme": "dark",
+    "tech_stack": {
+      "framework": "React.js",
+      "styling": "Tailwind CSS",
+      "components": "shadcn/ui (JavaScript .jsx format)",
+      "icons": "lucide-react",
+      "notifications": "sonner"
+    }
+  },
+  "typography": {
+    "heading_font": "Barlow Condensed, Outfit, sans-serif",
+    "body_font": "Plus Jakarta Sans, IBM Plex Sans, sans-serif",
+    "mono_font": "JetBrains Mono, monospace",
+    "google_fonts_import": "https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;0,900;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap",
+    "hierarchy": {
+      "hero_h1": "text-4xl sm:text-5xl md:text-6xl font-black tracking-tight uppercase leading-none",
+      "section_h2": "text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight uppercase",
+      "subsection_h3": "text-xl sm:text-2xl font-bold tracking-normal",
+      "card_h4": "text-lg sm:text-xl font-bold",
+      "body": "text-sm sm:text-base leading-relaxed text-zinc-300",
+      "caption": "text-xs font-mono uppercase tracking-widest text-zinc-400"
+    }
+  },
+  "colors": {
+    "palette": {
+      "background_dark": "#0B0C0E",
+      "surface_dark": "#121418",
+      "surface_dark_elevated": "#1A1D24",
+      "surface_border": "#272A34",
+      "surface_border_hover": "#3A3E4D",
+      "primary_accent": "#FF3B30",
+      "primary_accent_hover": "#E03126",
+      "primary_accent_glow": "rgba(255, 59, 48, 0.25)",
+      "secondary_accent": "#FF9500",
+      "text_primary": "#F4F4F6",
+      "text_secondary": "#9E9EA9",
+      "text_muted": "#60626D",
+      "status": {
+        "requested": "#FF9500",
+        "confirmed": "#30D158",
+        "declined": "#FF453A",
+        "completed": "#64D2FF"
+      }
+    },
+    "guidelines": [
+      "Use #0B0C0E as main background and #121418 for section cards / elevated blocks.",
+      "High contrast red #FF3B30 as primary action trigger (Book Now CTA, submit buttons, primary highlights).",
+      "Amber #FF9500 for secondary badges (Phone, Pending Status).",
+      "Strict contrast compliance: text on dark surfaces must be #F4F4F6 or #9E9EA9. Never use low contrast gray on dark background.",
+      "Never use pure #000000; tint neutrals with cool charcoal/slate hues."
+    ]
+  },
+  "layout_and_spacing": {
+    "spacing_scale": "Tailwind standard p-4, p-6, p-8, p-12, p-16, p-24",
+    "container": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
+    "header": {
+      "style": "sticky top-0 z-50 backdrop-blur-xl bg-[#0B0C0E]/85 border-b border-[#272A34]",
+      "elements": "Placeholder text logo (APEX COLLISION & BODY), nav links, click-to-call phone button, prominent Book Now button"
+    },
+    "grid_modes": {
+      "services": "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6",
+      "gallery_bento": "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[280px]",
+      "reviews": "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6",
+      "admin_dashboard": "grid grid-cols-1 md:grid-cols-4 gap-6"
+    }
+  },
+  "sections_and_functionality": {
+    "public_landing_page": {
+      "hero": {
+        "tagline": "Precision Autobody Repair, Custom Paint & Collision Mastery",
+        "ctas": ["Book Appointment Now", "Call Direct: (555) 019-2834"],
+        "visual": "Aggressive automotive aesthetics, high-contrast dark overlay, subtle carbon-mesh texture pattern, quick stats counter (15+ Yrs Exp, 100% Paint Match, Lifetime Warranty)"
+      },
+      "services": {
+        "items": [
+          {"id": "collision", "title": "Collision Repair", "desc": "Complete frame straightening, structural restoration, and OEM-spec body rebuilding.", "icon": "ShieldAlert"},
+          {"id": "paint", "title": "Custom Paint & Color Match", "desc": "Computerized spectrophotometer color matching and flawless multi-coat clear finishes.", "icon": "Paintbrush"},
+          {"id": "dent", "title": "Paintless Dent Repair (PDR)", "desc": "Precision dent and hail damage removal preserving original factory finish.", "icon": "Sparkles"},
+          {"id": "bumper", "title": "Bumper & Plastic Repair", "desc": "Crack repair, scuff refinishing, and full bumper replacement with factory fitment.", "icon": "Wrench"},
+          {"id": "scratch", "title": "Scratch & Chip Repair", "desc": "Deep scratch blend, rock chip fill, and wet sanding polish for glass-smooth clearcoat.", "icon": "Flame"},
+          {"id": "insurance", "title": "Insurance Claims Assistance", "desc": "Direct insurance billing, estimate support, and stress-free deductible management.", "icon": "FileCheck"}
+        ]
+      },
+      "gallery": {
+        "features": ["Category filter tabs (All, Collision, Custom Paint, Before & After)", "DB grid dynamic render", "Interactive lightbox overlay on image click", "Vehicle details and service tag overlay on hover"]
+      },
+      "reviews": {
+        "features": ["Dynamic reviews list from DB", "1-5 star visual rating component", "Reviewer name, vehicle model (e.g. 2023 Porsche 911 GT3), and verified customer badge"]
+      },
+      "appointment_form": {
+        "fields": [
+          {"name": "customer_name", "label": "Full Name", "type": "text", "required": true},
+          {"name": "phone", "label": "Phone Number", "type": "tel", "required": true},
+          {"name": "email", "label": "Email Address", "type": "email", "required": true},
+          {"name": "vehicle_year", "label": "Year", "type": "text", "required": true},
+          {"name": "vehicle_make", "label": "Make", "type": "text", "required": true},
+          {"name": "vehicle_model", "label": "Model", "type": "text", "required": true},
+          {"name": "service_type", "label": "Service Requested", "type": "select", "options": ["Collision Repair", "Custom Paint", "Dent Repair", "Bumper Repair", "Scratch & Chip", "Insurance Estimate", "Other"], "required": true},
+          {"name": "preferred_date", "label": "Preferred Date", "type": "date_picker", "required": true},
+          {"name": "preferred_time", "label": "Preferred Time", "type": "select", "options": ["Morning (8AM - 12PM)", "Afternoon (12PM - 4PM)", "Late Afternoon (4PM - 6PM)"], "required": true},
+          {"name": "notes", "label": "Damage Details / Notes", "type": "textarea", "required": false},
+          {"name": "damage_photos", "label": "Damage Photos (Max 3)", "type": "file_upload", "max_files": 3, "required": false}
+        ],
+        "validation_and_feedback": "Inline client validation, drag-and-drop photo preview thumbnails with remove button, Sonner toast notification + inline confirmation banner on success."
+      },
+      "footer": {
+        "content": ["Placeholder Shop Name: APEX COLLISION & BODY", "Address: 1420 Auto Center Dr, San Jose, CA 95131", "Phone: (555) 019-2834", "Email: service@apexcollision.com", "Hours: Mon-Fri: 7:30 AM - 6:00 PM | Sat: 8:00 AM - 2:00 PM | Sun: Closed"]
+      }
+    },
+    "owner_management_area": {
+      "path": "/admin",
+      "login_view": {
+        "title": "Shop Owner Portal",
+        "fields": ["email", "password"],
+        "demo_creds_hint": "Display helper badge for default credentials (owner@apexcollision.com / password123)"
+      },
+      "dashboard_view": {
+        "header": "Appointments Command Center",
+        "summary_cards": ["Total Requests", "Pending Approval", "Confirmed", "Completed"],
+        "controls": [
+          "Status filter tabs (All, Requested, Confirmed, Declined, Completed)",
+          "Source filter / indicator badge (Website vs Owner Walk-in/Phone)",
+          "Search bar by customer name, vehicle, or phone",
+          "Add Manual Appointment button"
+        ],
+        "appointment_table_or_cards": {
+          "columns": ["Customer & Contact", "Vehicle", "Service & Date/Time", "Source Badge", "Status Badge", "Actions"],
+          "actions": ["View Details Drawer/Dialog", "Change Status Dropdown", "Edit Date/Time", "Delete Appointment"]
+        },
+        "details_dialog": "Shows complete details, click-to-call/email, damage photos grid with zoom view, status updater, internal shop notes.",
+        "add_appointment_modal": "Form to create manual appointment with 'Owner Manual Entry' badge."
+      }
+    }
+  },
+  "components_usage": {
+    "shadcn_components_used": [
+      "frontend/src/components/ui/button.jsx",
+      "frontend/src/components/ui/card.jsx",
+      "frontend/src/components/ui/dialog.jsx",
+      "frontend/src/components/ui/drawer.jsx",
+      "frontend/src/components/ui/dropdown-menu.jsx",
+      "frontend/src/components/ui/select.jsx",
+      "frontend/src/components/ui/input.jsx",
+      "frontend/src/components/ui/textarea.jsx",
+      "frontend/src/components/ui/badge.jsx",
+      "frontend/src/components/ui/tabs.jsx",
+      "frontend/src/components/ui/table.jsx",
+      "frontend/src/components/ui/sonner.jsx"
+    ],
+    "file_extension_rule": "All component files MUST be .jsx (React JavaScript), NEVER .tsx"
+  },
+  "testing_requirements": {
+    "rule": "ALL interactive elements, form inputs, buttons, navigation links, status indicators, and modal triggers MUST include explicit kebab-case data-testid attributes.",
+    "key_testids": [
+      "data-testid=\"nav-logo\"",
+      "data-testid=\"nav-book-now-button\"",
+      "data-testid=\"nav-phone-link\"",
+      "data-testid=\"hero-book-now-button\"",
+      "data-testid=\"hero-call-button\"",
+      "data-testid=\"service-card-collision\"",
+      "data-testid=\"service-card-paint\"",
+      "data-testid=\"gallery-filter-all\"",
+      "data-testid=\"gallery-image-item\"",
+      "data-testid=\"lightbox-dialog\"",
+      "data-testid=\"appointment-form\"",
+      "data-testid=\"appointment-submit-button\"",
+      "data-testid=\"damage-photo-upload-input\"",
+      "data-testid=\"admin-login-email-input\"",
+      "data-testid=\"admin-login-password-input\"",
+      "data-testid=\"admin-login-submit-button\"",
+      "data-testid=\"admin-status-filter-all\"",
+      "data-testid=\"admin-status-filter-requested\"",
+      "data-testid=\"admin-status-filter-confirmed\"",
+      "data-testid=\"admin-add-appointment-button\"",
+      "data-testid=\"appointment-row-status-select\"",
+      "data-testid=\"appointment-details-button\"",
+      "data-testid=\"appointment-delete-button\""
+    ]
+  },
+  "universal_guidelines": [
+    "Dark charcoal background with neon-crimson energetic automotive accents.",
+    "Large bold headings using Barlow Condensed / Outfit uppercase styles.",
+    "Fully responsive layout optimized mobile-first.",
+    "Never use generic centered layouts without visual weight.",
+    "Do NOT use transparent backgrounds on dropdowns, modals, or fixed navigation.",
+    "Use Sonner for toast feedback on all actions.",
+    "Keep source files strictly in JavaScript (.jsx) format."
+  ]
+}

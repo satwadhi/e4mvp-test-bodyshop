@@ -1,0 +1,141 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;0,900;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    margin: 0;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: #0b0c0e;
+    color: #f4f4f6;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+@layer base {
+    :root {
+        --background: 220 12% 5%;
+        --foreground: 240 9% 96%;
+        --card: 222 14% 8%;
+        --card-foreground: 240 9% 96%;
+        --popover: 222 14% 8%;
+        --popover-foreground: 240 9% 96%;
+        --primary: 3 100% 59%;
+        --primary-foreground: 0 0% 100%;
+        --secondary: 222 15% 12%;
+        --secondary-foreground: 240 9% 96%;
+        --muted: 222 15% 12%;
+        --muted-foreground: 240 5% 64%;
+        --accent: 222 15% 14%;
+        --accent-foreground: 240 9% 96%;
+        --destructive: 3 100% 61%;
+        --destructive-foreground: 0 0% 100%;
+        --border: 228 13% 18%;
+        --input: 228 13% 18%;
+        --ring: 3 100% 59%;
+        --radius: 0.25rem;
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
+    ::selection {
+        background: #ff3b30;
+        color: #fff;
+    }
+}
+
+@layer components {
+    .font-display {
+        font-family: "Barlow Condensed", sans-serif;
+    }
+    .font-mono-ui {
+        font-family: "JetBrains Mono", monospace;
+    }
+    .eyebrow {
+        @apply font-mono-ui text-xs uppercase tracking-[0.25em] text-[#FF3B30];
+    }
+    .section-title {
+        @apply font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold uppercase leading-[0.95] tracking-tight;
+    }
+    .field-input {
+        @apply w-full h-12 rounded-sm bg-[#0B0C0E] border border-[#272A34] px-4 text-base text-[#F4F4F6] placeholder:text-[#60626D] outline-none;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .field-input:focus {
+        border-color: #ff3b30;
+        box-shadow: 0 0 0 3px rgba(255, 59, 48, 0.2);
+    }
+    .field-input[aria-invalid="true"] {
+        border-color: #ff453a;
+    }
+    .btn-accent {
+        @apply inline-flex items-center justify-center gap-2 rounded-sm bg-[#FF3B30] px-6 font-display text-lg font-bold uppercase tracking-wider text-white;
+        transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .btn-accent:hover {
+        background: #e03126;
+        box-shadow: 0 10px 30px -10px rgba(255, 59, 48, 0.6);
+        transform: translateY(-1px);
+    }
+    .btn-accent:disabled {
+        @apply opacity-60 cursor-not-allowed;
+        transform: none;
+        box-shadow: none;
+    }
+    .btn-ghost {
+        @apply inline-flex items-center justify-center gap-2 rounded-sm border border-[#3A3E4D] px-6 font-display text-lg font-bold uppercase tracking-wider text-[#F4F4F6];
+        transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+    .btn-ghost:hover {
+        border-color: #f4f4f6;
+        background: rgba(255, 255, 255, 0.04);
+    }
+    .grain::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.06;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    .stripe-accent {
+        background: repeating-linear-gradient(-45deg, #ff3b30 0 10px, transparent 10px 20px);
+    }
+}
+
+@keyframes rise {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.rise {
+    animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+[data-debug-wrapper="true"] {
+    display: contents !important;
+}
